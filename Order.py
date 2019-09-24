@@ -9,5 +9,5 @@ class Order:
         self.OrderId = orderId
         self.Portfolio = portfolio
 
-        print('You bought ', self.Volume, ' number of ', self.Stock, ' stocks, at ', self.DateOfPurchase, '. OrderID= ',
+        print('You bought ', self.Volume, ' number of ', self.Stock.name, ' stocks, at ', self.DateOfPurchase, '. OrderID= ',
               self.OrderId, sep='')
