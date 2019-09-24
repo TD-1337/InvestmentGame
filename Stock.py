@@ -2,7 +2,7 @@ class Stock:
     def __init__(self, name):
         self.name = name
 
-    def retrieve_stock_price_hist(self):
+    def retrieve_stock_price_hist(self, date):
         import requests
         import pandas as pd
 
@@ -10,7 +10,7 @@ class Stock:
         string_pt2 = self.name
         string_pt3 = "&interval=5min&outputsize=full&apikey=demo"
 
-        string_concat = string_pt1.append(string_pt2).append(string_pt3)
+        string_concat = string_pt1 + string_pt2 + string_pt3
 
         # Get response from server
         response = requests.get(string_concat)
@@ -40,4 +40,4 @@ class Stock:
         # Get closing price per day
         close_per_day = df.close.resample('B').last()
 
-        return close_per_day
+        return close_per_day[date]

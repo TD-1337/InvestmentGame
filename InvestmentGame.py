@@ -1,10 +1,7 @@
-import Order
-import Stock
-import Portfolio
+from Stock import Stock
 
-def main():
-    stock = Stock("ABN")
-    stock.retrieve_stock_price_hist()
+stock = Stock("MSFT")
+print(stock.retrieve_stock_price_hist("2019-09-23"))
 
 
 
