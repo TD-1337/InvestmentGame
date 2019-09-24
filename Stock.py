@@ -1,7 +1,6 @@
 class Stock:
-    def __init__(self, name, stock_price_hist):
+    def __init__(self, name):
         self.name = name
-        self.stock_price_hist = self.retrieve_stock_price_hist
 
     def retrieve_stock_price_hist(self):
         # Get response from server
