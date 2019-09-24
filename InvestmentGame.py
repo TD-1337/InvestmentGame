@@ -1,10 +1,18 @@
-import Order
-import Stock
+from Order import Order
+from Stock import Stock
 import Portfolio
 
-def main():
-    stock = Stock("ABN")
-    stock.retrieve_stock_price_hist()
+list_of_stocks = ['ABN', 'ING', 'RABO']
+print('List of possible stocks: ', list_of_stocks)
+stock = input("Which stock do you want to purchase? ")
+volume = input("How many stocks do you want to purchase? ")
+dateOfPurchase = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+orderId = 1
+
+order1 = Order(stock, volume, dateOfPurchase, orderId)
+
+stock = Stock("ABN")
+stock.retrieve_stock_price_hist()
 
 
 
