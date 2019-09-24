@@ -1,19 +1,20 @@
 from Order import Order
 from Stock import Stock
-import Portfolio
+from Portfolio import Portfolio
+from datetime import datetime
 
-#list_of_stocks = ['ABN', 'ING', 'RABO']
-#print('List of possible stocks: ', list_of_stocks)
-#stock = input("Which stock do you want to purchase? ")
-#volume = input("How many stocks do you want to purchase? ")
-#dateOfPurchase = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-#orderId = 1
+list_of_stocks = ['MSFT', 'ING', 'RABO']
+print('List of possible stocks: ', list_of_stocks)
+stockName = input("Which stock do you want to purchase? ")
+volume = input("How many stocks do you want to purchase? ")
+dateOfPurchase = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+orderId = 1
 
-#order1 = Order(stock, volume, dateOfPurchase, orderId)
+stock = Stock(stockName)
+stockPrice = stock.retrieve_stock_price_hist(dateOfPurchase)
 
-stock = Stock("MSFT")
-print(stock.retrieve_stock_price_now())
-print(stock.retrieve_stock_price_EOD("2019-09-23"))
+order1 = Order(stockName, volume, dateOfPurchase, orderId)
 
+stock.retrieve_stock_price_hist()
 
 
