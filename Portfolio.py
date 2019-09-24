@@ -14,7 +14,7 @@ class Portfolio:
     def AddOrder(self, order):
         self.orders.append(order)
 
-    def CalculateValue(self):
+    def CalculateValueNow(self):
         value = 0
         for order in self.orders:
             value += order.Volume * order.Stock.retrieve_stock_price_now()
