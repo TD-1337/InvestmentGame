@@ -18,9 +18,8 @@ dateOfPurchase = datetime.now().strftime('%Y-%m-%d')
 orderId = 1
 
 stock = Stock(stockName)
-stockPriceAtPurchase = stock.retrieve_stock_price_now()
-print(stock.retrieve_stock_price_now())
-newOrder = Order(stockName, volume, dateOfPurchase,stockPriceAtPurchase, orderId)
+stockPriceAtPurchase = stock.retrieve_stock_price_EOD(dateOfPurchase)
+newOrder = Order(stockName, volume, stockPriceAtPurchase, dateOfPurchase, orderId)
 
 newPortfolio.AddOrder(newOrder)
 valueAtPurchase = newPortfolio.ValueAtPurchaseDate()
