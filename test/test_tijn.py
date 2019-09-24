@@ -28,3 +28,5 @@ df.rename(columns=lambda s: s[3:], inplace=True)
 
 # Get closing price per day
 close_per_day = df.close.resample('B').last()
+
+print(close_per_day)
