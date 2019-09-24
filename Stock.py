@@ -65,6 +65,6 @@ class Stock:
         colname = list(raw_data.keys())[-1]
 
         # Extract the corresponding column only
-        quote = raw_data[colname]['05. price']
+        quote = float(raw_data[colname]['05. price'])
 
         return quote
