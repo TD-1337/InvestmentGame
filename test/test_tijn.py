@@ -14,6 +14,8 @@ raw_data = response.json()
 # Retrieve the name of the column with our actual data
 colname = list(raw_data.keys())[-1]
 
+print(colname)
+
 # Extract the corresponding column only
 data = raw_data[colname]
 
@@ -29,4 +31,4 @@ df.rename(columns=lambda s: s[3:], inplace=True)
 # Get closing price per day
 close_per_day = df.close.resample('B').last()
 
-print(close_per_day)
+#print(close_per_day)
