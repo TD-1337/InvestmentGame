@@ -34,9 +34,10 @@ while user_input.lower() == "y":
     if action_1.lower() == "view portfolio":
         # return portfolio
         portfolio_name = input("What is the name of the portfolio? ")
+        print_report_df = pd.DataFrame([x.return_as_dict() for x in portfolio_dict[portfolio_name].orders])
 
         print("Your portfolio consists of the following: ")
-        print(portfolio_dict[portfolio_name].orders)  # Add optionality
+        print(print_report_df) # Add optionality
 
     elif action_1.lower() == "add order":
         # add order
