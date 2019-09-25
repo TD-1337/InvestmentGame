@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sell Order</title>
+</head>
+<body>
+    <form method="post">
+        What is the name of the portfolio from which you want to sell a stock?
+        <input type ="text" name="portfolio">
+        <br>
+        What stock do you want to sell?
+        <input type ="text" name="stock">
+        <br>
+        How many?
+        <input type="number" name="amount">
+        <br>
+        Do you want purchase sell stock?
+        <select name="next_action">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            <option value="Back to Home">Back to Home</option>
+        </select>
+        <br>
+        <button type="submit">Sell</button>
+
+        <br>
+        <br>
+        Go back to <a href="http://127.0.0.1:5000/">Home</a>
+    </form>
+
+
+</body>
+</html>
