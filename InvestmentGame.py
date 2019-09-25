@@ -80,12 +80,10 @@ print("Thanks for visiting!")
 
 # Get al orders and put them in a dataframe
 for y in portfolio_dict:
-    export_df = pd.DataFrame([x.return_as_dict() for x in portfolio_dict[y].Orders])
+    export_df = pd.DataFrame([x.return_as_dict() for x in portfolio_dict[y].orders])
 
 time_stamp = datetime.now()
 
-csv_name = time_stamp.strftime('%d-%m-%y (%H %M)') + 'order.csv'
-
 # Export the dataframe to a csv
-export_df.to_csv(csv_name)
+export_df.to_csv('order.csv')
 
