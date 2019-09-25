@@ -7,22 +7,22 @@ class Portfolio:
     from Stock import Stock
 
     def __init__(self, name):
-        self.Name = name
-        self.Orders = []
+        self.name = name
+        self.orders = []
 
     def add_order(self, order):
-        self.Orders.append(order)
+        self.orders.append(order)
 
     def calculate_value_now(self):
         value = 0
-        for order in self.Orders:
-            value += order.Volume * order.Stock.retrieve_stock_price_now()
+        for order in self.orders:
+            value += order.volume * order.stock.retrieve_stock_price_now()
         return value
 
     def calculate_value_at_purchase_date(self):
         value = 0
-        for order in self.Orders:
-            value += order.Volume * order.PriceAtPurchase
+        for order in self.orders:
+            value += order.volume * order.price_at_purchase
         return value
 
     def calculate_return(self):
