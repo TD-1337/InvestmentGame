@@ -19,44 +19,46 @@ from datetime import datetime
 ### View portfolio / returns
 ### Sell (optional)
 
-UserInput = "Y"
+user_input = "Y"
 
-while UserInput.lower() == "y":
+while user_input.lower() == "y":
 
-    Action_1 = input('What do you wish to do? (choose from: "Add Order", "View Portfolio")')
+    action_1 = input('What do you wish to do? (choose from: "Add Order", "View Portfolio")')
 
-    if Action_1.lower() == "view portfolio":
+    if action_1.lower() == "view portfolio":
         # return portfolio
-        print("View Portfolio") # Add optionality
-    elif Action_1.lower() == "add order":
+        portfolio_name = input("What is the name of the portfolio?")
+
+        print("Your portfolio consists of the following: ")
+        print(Portfolio(portfolio_name)) # Add optionality
+
+    elif action_1.lower() == "add order":
         # add order
-        NewOrExisting = input("Do you already have a portfolio with us? (Y/N)")
-        portfolioName = input("What is the name of the portfolio?")
-        stockName = input("Which stock do you want to purchase? Please input ticker ")
+        new_or_existing = input("Do you already have a portfolio with us? (Y/N)")
+        portfolio_name = input("What is the name of the portfolio?")
+        stock_name = input("Which stock do you want to purchase? Please input ticker: ")
         volume = int(input("How many stocks do you want to purchase? "))
 
-        dateOfPurchase = datetime.now().strftime('%Y-%m-%d')
-        stock = Stock(stockName)
-        stockPriceAtPurchase = stock.retrieve_stock_price_now()
+        date_of_purchase = datetime.now().strftime('%Y-%m-%d')
+        stock = Stock(stock_name)
+        stock_price_at_purchase = stock.retrieve_stock_price_now()
 
-        if NewOrExisting.lower() == "n":
-            ownerName = input("What is your name?")
-            newPortfolio = Portfolio(portfolioName, ownerName)
+        if new_or_existing.lower() == "n":
+            new_portfolio = Portfolio(portfolio_name)
 
-        elif NewOrExisting.lower() == "y":
-            ownerName = input("What is your name?")
-            newPortfolio = Portfolio(portfolioName, ownerName)
+        elif new_or_existing.lower() == "y":
+            new_portfolio = Portfolio(portfolio_name)
 
-        orderId = len(newPortfolio.Orders) + 1
-        newOrder = Order(stock, volume, stockPriceAtPurchase, dateOfPurchase, orderId, newPortfolio.Name)
+        order_id = len(new_portfolio.orders) + 1
+        new_order = Order(stock, volume, stock_price_at_purchase, date_of_purchase, order_id, new_portfolio.name)
 
-        newPortfolio.AddOrder(newOrder)
-        portfolioReturn = newPortfolio.CalculateReturn()
+        new_portfolio.AddOrder(new_order)
+        portfolio_return = new_portfolio.CalculateReturn()
 
     else:
         print("Incorrect input, please try again")
 
-    UserInput = input('Do you wish to continue? (Y/N)')
+    user_input = input('Do you wish to continue? (Y/N)')
 
 print("Thanks for visiting!")
 ######################################

@@ -6,24 +6,23 @@ class Portfolio:
     from Order import Order
     from Stock import Stock
 
-    def __init__(self, name, owner):
-        self.Name = name
-        self.Owner = owner
-        self.Orders = []
+    def __init__(self, name):
+        self.name = name
+        self.orders = []
 
     def AddOrder(self, order):
-        self.Orders.append(order)
+        self.orders.append(order)
 
     def CalculateValueNow(self):
         value = 0
-        for order in self.Orders:
-            value += order.Volume * order.Stock.retrieve_stock_price_now()
+        for order in self.orders:
+            value += order.volume * order.stock.retrieve_stock_price_now()
         return value
 
     def CalculateValueAtPurchaseDate(self):
         value = 0
-        for order in self.Orders:
-            value += order.Volume * order.PriceAtPurchase
+        for order in self.orders:
+            value += order.volume * order.price_at_purchase
         return value
 
     def CalculateReturn(self):
