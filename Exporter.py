@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def export_to_csv(portfolio_dict):
     # Set var to check if dataframe needs to be created or appended
     create_df = 1

@@ -1,7 +1,8 @@
-from datetime import datetime
+import datetime
 from Order import Order
 from Stock import Stock
 from Portfolio import Portfolio
+import pandas as pd
 
 class UserInterface:
 
@@ -33,10 +34,14 @@ class UserInterface:
                 if new_or_existing.lower() == "n":
                     portfolio_name = input("What name do you wish to give your portfolio? ")
                     self.portfolio_dict[portfolio_name] = Portfolio(portfolio_name)
+                    portfolio_this_order = self.portfolio_dict[portfolio_name]
 
                 elif new_or_existing.lower() == "y":
                     portfolio_name = input("What is the name of the portfolio? ")
                     portfolio_this_order = self.portfolio_dict[portfolio_name]
+
+                else:
+                    raise Exception()
 
                 stock_name = input("Which stock do you want to purchase? Please input ticker: ")
                 volume = int(input("How many stocks do you want to purchase? "))
