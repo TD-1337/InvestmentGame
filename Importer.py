@@ -1,5 +1,6 @@
 import pandas as pd
 from Order import Order
+from Stock import Stock
 from Portfolio import Portfolio
 
 class Importer:
@@ -11,7 +12,7 @@ class Importer:
         portfolio_dict = {}
 
         for index, row in order_history.iterrows():
-            stock_this_order = row['Stock']
+            stock_this_order = Stock(row['Stock'])
             volume_this_order = row['Volume']
             price_at_purchase_this_order = row['PriceAtPurchase']
             date_of_purchase_this_order = row['DateOfPurchase']
