@@ -30,3 +30,14 @@ class Portfolio:
         value_now = self.calculate_value_now()
         return value_now - value_at_purchase
 
+    def calculate_balances(self):
+        stock_balances = {}
+        for order in self.orders:
+            stock_name = order.stock.name
+            if not stock_name in stock_balances:
+                stock_balances[stock_name] = order.volume
+            else:
+                stock_balances[stock_name] += order.volume
+        return stock_balances
+
+

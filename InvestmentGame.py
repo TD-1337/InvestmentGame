@@ -6,6 +6,8 @@ from Importer import Importer
 from UserInterface import UserInterface
 import Exporter
 import os
+from Visualise import Visualise
+from Stock import Stock
 
 ######################################
 # Import existing order functionality
@@ -15,6 +17,13 @@ importer = Importer(os.getcwd())
 portfolio_dict = importer.import_order_history_into_portfolios()
 
 ### import class which imports content of csv to Portfolio / Order objects
+
+######################################
+# Visualise test
+######################################
+# 
+# visualisation = Visualise()
+# visualisation.plot_stock_return("TWTR", '25-09-2018')
 
 ######################################
 # Add new order
@@ -31,5 +40,5 @@ UserInterface(portfolio_dict).run_user_interface()
 # Export new order functionality
 ######################################
 
-#Export to CSV
+# Export to CSV
 Exporter.export_to_csv(portfolio_dict)
