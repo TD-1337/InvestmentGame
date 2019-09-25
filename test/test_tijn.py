@@ -1,8 +1,13 @@
 import requests
-import pandas as pd
+
+string_pt1 = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="
+string_pt2 = "TWTR"
+string_pt3 = "&apikey=1MUPY30U6YSICG6M"
+
+string_concat = string_pt1 + string_pt2 + string_pt3
 
 # Get response from server
-response = requests.get("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=MSFT&interval=5min&outputsize=full&apikey=demo")
+response = requests.get(string_concat)
 
 # Check if valid
 if response.status_code != 200:
@@ -14,21 +19,6 @@ raw_data = response.json()
 # Retrieve the name of the column with our actual data
 colname = list(raw_data.keys())[-1]
 
-print(colname)
-
 # Extract the corresponding column only
-data = raw_data[colname]
-
-# Change to dataframe
-df = pd.DataFrame(data).T.apply(pd.to_numeric)
-
-# Parse the index to create a datetimeindex
-df.index = pd.DatetimeIndex(df.index)
-
-# Fix the column names
-df.rename(columns=lambda s: s[3:], inplace=True)
-
-# Get closing price per day
-close_per_day = df.close.resample('B').last()
-
-#print(close_per_day)
+quote = float(raw_data[colname]['05. price'])
+print(raw_data)

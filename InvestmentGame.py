@@ -3,10 +3,15 @@ from Stock import Stock
 from Portfolio import Portfolio
 from datetime import datetime
 import pandas as pd
+from Importer import Importer
+import os
 
 ######################################
 # Import existing order functionality
 ######################################
+
+importer = Importer(os.getcwd())
+portfolio_dict = importer.import_order_history_into_portfolios()
 
 ### import class which imports content of csv to Portfolio / Order objects
 
@@ -67,7 +72,9 @@ print("Thanks for visiting!")
 ######################################
 
 # Get al orders and put them in a dataframe
-export_df = pd.DataFrame([x.return_as_dict() for x in order_list])
+for y in portfolio_dict
+    export_df = pd.DataFrame([x.return_as_dict() for x in portfolio_dict[y].orders])
 
 # Export the dataframe to a csv
 export_df.to_csv('order.csv')
+
