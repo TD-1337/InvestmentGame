@@ -9,5 +9,6 @@ class Order:
         self.OrderId = orderId
         self.Portfolio = portfolio
 
-        print('You bought ', self.Volume, ' number of ', self.Stock, ' stocks, at ', self.DateOfPurchase, '. OrderID= ',
-              self.OrderId, sep='')
+    def return_as_dict(self):
+        return {'Stock': self.Stock, 'Volume': self.Volume, 'Price at purchase': self.priceAtPurchase,
+                'Date of purchase': self.DateOfPurchase, 'OrderID': self.OrderId, 'Portfolio': self.Portfolio}
