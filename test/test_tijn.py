@@ -1,8 +1,8 @@
 import requests
 
-string_pt1 = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="
+string_pt1 = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="
 string_pt2 = "TWTR"
-string_pt3 = "&apikey=1MUPY30U6YSICG6M"
+string_pt3 = "&interval=5min&outputsize=full&apikey=1MUPY30U6YSICG6M"
 
 string_concat = string_pt1 + string_pt2 + string_pt3
 
@@ -19,6 +19,4 @@ raw_data = response.json()
 # Retrieve the name of the column with our actual data
 colname = list(raw_data.keys())[-1]
 
-# Extract the corresponding column only
-quote = float(raw_data[colname]['05. price'])
 print(raw_data)

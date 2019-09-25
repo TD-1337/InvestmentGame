@@ -2,13 +2,13 @@ class Stock:
     def __init__(self, name):
         self.name = name
 
-    def retrieve_stock_price_EOD(self, date):
+    def retrieve_stock_price_hist(self, date):
         import requests
         import pandas as pd
 
-        string_pt1 = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="
+        string_pt1 = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="
         string_pt2 = self.name
-        string_pt3 = "&interval=5min&outputsize=full&apikey=1MUPY30U6YSICG6M"
+        string_pt3 = "&outputsize=full&apikey=1MUPY30U6YSICG6M"
 
         string_concat = string_pt1 + string_pt2 + string_pt3
 
@@ -40,7 +40,7 @@ class Stock:
         # Get closing price per day
         close_per_day = df.close.resample('B').last()
 
-        return close_per_day[date]
+        return close_per_day
 
     def retrieve_stock_price_now(self):
         import requests
