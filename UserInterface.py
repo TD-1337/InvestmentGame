@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from Order import Order
 from Stock import Stock
 from Portfolio import Portfolio
@@ -54,7 +54,7 @@ class UserInterface:
                 new_order = self.create_sell_order(number_of_existing_orders, portfolio_this_order)
                 portfolio_this_order.add_order(new_order)
 
-                print('You sold ', new_order.volume, ' of ', new_order.stock.name, ' stocks, at EUR ',
+                print('You sold ', float(new_order.volume) * -1, ' of ', new_order.stock.name, ' stocks, at EUR ',
                       new_order.price, ' at ', new_order.date, '. OrderID = ',
                       new_order.order_id,
                       sep='')
@@ -65,17 +65,6 @@ class UserInterface:
             user_input = input('Do you wish to continue? (Y/N) ')
 
         print("Thanks for visiting!")
-
-    def create_sell_order(self, number_of_existing_orders, portfolio_this_order):
-        stock_to_sell = input("Please indicate which stock (TICKER) you want to sell. ")
-        amount_to_sell = float(input("Please indicate how much of " + stock_to_sell + " you want to sell. ")) * -1
-        date_of_sale = datetime.now().strftime('%Y-%m-%d')
-        stock = Stock(stock_to_sell)
-        stock_price_at_sale = stock.retrieve_stock_price_now()
-        order_id = number_of_existing_orders + 1
-        new_order = Order(stock_to_sell, amount_to_sell, stock_price_at_sale, date_of_sale, order_id,
-                          portfolio_this_order.name)
-        return new_order
 
     def method_name(self, portfolio_name):
         print_report_df = pd.DataFrame([x.return_as_dict() for x in self.portfolio_dict[portfolio_name].orders])
@@ -90,6 +79,17 @@ class UserInterface:
         stock_price_at_purchase = stock.retrieve_stock_price_now()
         order_id = number_of_existing_orders + 1
         new_order = Order(stock, volume, stock_price_at_purchase, date_of_purchase, order_id, portfolio_this_order.name)
+        return new_order
+
+    def create_sell_order(self, number_of_existing_orders, portfolio_this_order):
+        stock_to_sell = input("Please indicate which stock (TICKER) you want to sell. ")
+        amount_to_sell = float(input("Please indicate how much of " + stock_to_sell + " you want to sell. ")) * -1
+        date_of_sale = datetime.now().strftime('%Y-%m-%d')
+        stock = Stock(stock_to_sell)
+        stock_price_at_sale = stock.retrieve_stock_price_now()
+        order_id = number_of_existing_orders + 1
+        new_order = Order(stock, amount_to_sell, stock_price_at_sale, date_of_sale, order_id,
+                          portfolio_this_order.name)
         return new_order
 
     def determine_portfolio(self):

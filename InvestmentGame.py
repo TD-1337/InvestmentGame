@@ -21,24 +21,24 @@ portfolio_dict = importer.import_order_history_into_portfolios()
 ######################################
 # Visualise test
 ######################################
+# 
+# visualisation = Visualise()
+# visualisation.plot_stock_return("TWTR", '25-09-2018')
 
-visualisation = Visualise()
-visualisation.plot_stock_return("TWTR", '25-09-2018')
+######################################
+# Add new order
+######################################
 
-# ######################################
-# # Add new order
-# ######################################
-#
-# UserInterface(portfolio_dict).run_user_interface()
-#
-# ### View portfolio / returns
-# #new_portfolio.calculate_return()
-# ### Sell (optional)
-#
-#
-# ######################################
-# # Export new order functionality
-# ######################################
-#
-# # Export to CSV
-# Exporter.export_to_csv(portfolio_dict)
+UserInterface(portfolio_dict).run_user_interface()
+
+### View portfolio / returns
+#new_portfolio.calculate_return()
+### Sell (optional)
+
+
+######################################
+# Export new order functionality
+######################################
+
+# Export to CSV
+Exporter.export_to_csv(portfolio_dict)
