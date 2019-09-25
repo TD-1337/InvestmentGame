@@ -26,7 +26,7 @@ class Portfolio:
         return value
 
     def calculate_return(self):
-        valueAtPurchase = self.calculate_value_at_purchase_date()
-        valueNow = self.calculate_value_now()
-        return valueNow - valueAtPurchase
+        value_at_purchase = self.calculate_value_at_purchase_date()
+        value_now = self.calculate_value_now()
+        return value_now - value_at_purchase
 
