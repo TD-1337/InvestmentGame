@@ -3,10 +3,15 @@ from Stock import Stock
 from Portfolio import Portfolio
 from datetime import datetime
 import pandas as pd
+from Importer import Importer
+import os
 
 ######################################
 # Import existing order functionality
 ######################################
+
+importer = Importer(os.getcwd())
+portfolio_dict = importer.import_order_history_into_portfolios()
 
 ### import class which imports content of csv to Portfolio / Order objects
 
@@ -21,24 +26,23 @@ import pandas as pd
 ### Sell (optional)
 
 
-portfolioName = "My Portfolio"
-ownerName = "Stef"
+portfolio_name = "My Portfolio"
 
-newPortfolio = Portfolio(portfolioName, ownerName)
+new_portfolio = Portfolio(portfolio_name, owner_name)
 
-stockName = input("Which stock do you want to purchase? Please input ticker ")
+stock_name = input("Which stock do you want to purchase? Please input ticker ")
 volume = int(input("How many stocks do you want to purchase? "))
 
-dateOfPurchase = datetime.now().strftime('%Y-%m-%d')
+date_of_purchase = datetime.now().strftime('%Y-%m-%d')
 
-stock = Stock(stockName)
-stockPriceAtPurchase = stock.retrieve_stock_price_now()
+stock = Stock(stock_name)
+stock_price_at_purchase = stock.retrieve_stock_price_now()
 
-orderId = len(newPortfolio.Orders) + 1
-newOrder = Order(stock, volume, stockPriceAtPurchase, dateOfPurchase, orderId, newPortfolio.Name)
+order_id = len(new_portfolio.orders) + 1
+new_order = Order(stock, volume, stock_price_at_purchase, date_of_purchase, order_id, new_portfolio.Name)
 
-newPortfolio.AddOrder(newOrder)
-portfolioReturn = newPortfolio.CalculateReturn()
+new_portfolio.addorder(new_order)
+portfolio_return = new_portfolio.calculate_return()
 
 ######################################
 # Export new order functionality
@@ -50,3 +54,4 @@ for y in portfolio_dict
 
 # Export the dataframe to a csv
 export_df.to_csv('order.csv')
+
