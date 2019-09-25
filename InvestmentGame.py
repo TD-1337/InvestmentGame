@@ -25,7 +25,7 @@ portfolio_dict = importer.import_order_history_into_portfolios()
 ### View portfolio / returns
 ### Sell (optional)
 
-user_input = "y"
+user_input = "n"
 
 while user_input.lower() == "y":
 
@@ -36,7 +36,7 @@ while user_input.lower() == "y":
         portfolio_name = input("What is the name of the portfolio? ")
 
         print("Your portfolio consists of the following: ")
-        print(portfolio_dict[portfolio_name].orders) # Add optionality
+        print(portfolio_dict[portfolio_name].orders)  # Add optionality
 
     elif action_1.lower() == "add order":
         # add order
@@ -50,7 +50,6 @@ while user_input.lower() == "y":
             portfolio_name = input("What is the name of the portfolio? ")
             new_portfolio = Portfolio(portfolio_name)
 
-
         stock_name = input("Which stock do you want to purchase? Please input ticker: ")
         volume = int(input("How many stocks do you want to purchase? "))
 
@@ -58,15 +57,15 @@ while user_input.lower() == "y":
         stock = Stock(stock_name)
         stock_price_at_purchase = stock.retrieve_stock_price_now()
 
-
-
         order_id = len(new_portfolio.orders) + 1
         new_order = Order(stock, volume, stock_price_at_purchase, date_of_purchase, order_id, new_portfolio.name)
 
         new_portfolio.add_order(new_order)
         portfolio_return = new_portfolio.calculate_return()
 
-        print('You bought ', new_order.volume, ' of ', new_order.stock.name, ' stocks, at EUR ', new_order.price_at_purchase, ' at ', new_order.date_of_purchase, '. OrderID = ',new_order.order_id, sep='')
+        print('You bought ', new_order.volume, ' of ', new_order.stock.name, ' stocks, at EUR ',
+              new_order.price_at_purchase, ' at ', new_order.date_of_purchase, '. OrderID = ', new_order.order_id,
+              sep='')
 
     else:
         print("Incorrect input, please try again")
@@ -78,12 +77,20 @@ print("Thanks for visiting!")
 # Export new order functionality
 ######################################
 
-# Get al orders and put them in a dataframe
-for y in portfolio_dict:
-    export_df = pd.DataFrame([x.return_as_dict() for x in portfolio_dict[y].orders])
+# Set var to check if dataframe needs to be created or appended
+create_df = 1
 
-time_stamp = datetime.now()
+# Get all orders and put them in a dataframe
+for y in portfolio_dict:
+    if create_df == 1:
+        # Create data frame with first portfolio
+        export_df = pd.DataFrame([x.return_as_dict() for x in portfolio_dict[y].orders])
+        # Turn off creation of data frame
+        create_df = 0
+    else:
+        # Append to data frame
+        export_df = export_df.append(pd.DataFrame([x.return_as_dict() for x in portfolio_dict[y].orders]))
+
 
 # Export the dataframe to a csv
-export_df.to_csv('order.csv')
-
+export_df.to_csv('orders.csv')
