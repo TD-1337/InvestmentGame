@@ -25,29 +25,29 @@ portfolio_dict = importer.import_order_history_into_portfolios()
 ### View portfolio / returns
 ### Sell (optional)
 
-user_input = "N"
+user_input = "y"
 
 while user_input.lower() == "y":
 
-    action_1 = input('What do you wish to do? (choose from: "Add Order", "View Portfolio")')
+    action_1 = input('What do you wish to do? (choose from: "Add Order", "View Portfolio") ')
 
     if action_1.lower() == "view portfolio":
         # return portfolio
-        portfolio_name = input("What is the name of the portfolio?")
+        portfolio_name = input("What is the name of the portfolio? ")
 
         print("Your portfolio consists of the following: ")
-        print(Portfolio(portfolio_name)) # Add optionality
+        print(portfolio_dict[portfolio_name].orders) # Add optionality
 
     elif action_1.lower() == "add order":
         # add order
-        new_or_existing = input("Do you already have a portfolio with us? (Y/N)")
+        new_or_existing = input("Do you already have a portfolio with us? (Y/N) ")
 
         if new_or_existing.lower() == "n":
-            portfolio_name = input("What name do you wish to give your portfolio?")
+            portfolio_name = input("What name do you wish to give your portfolio? ")
             new_portfolio = Portfolio(portfolio_name)
 
         elif new_or_existing.lower() == "y":
-            portfolio_name = input("What is the name of the portfolio?")
+            portfolio_name = input("What is the name of the portfolio? ")
             new_portfolio = Portfolio(portfolio_name)
 
 
@@ -71,7 +71,7 @@ while user_input.lower() == "y":
     else:
         print("Incorrect input, please try again")
 
-    user_input = input('Do you wish to continue? (Y/N)')
+    user_input = input('Do you wish to continue? (Y/N) ')
 
 print("Thanks for visiting!")
 ######################################
