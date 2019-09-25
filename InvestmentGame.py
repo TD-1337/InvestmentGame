@@ -25,7 +25,7 @@ portfolio_dict = importer.import_order_history_into_portfolios()
 ### View portfolio / returns
 ### Sell (optional)
 
-user_input = "Y"
+user_input = "N"
 
 while user_input.lower() == "y":
 
@@ -84,8 +84,6 @@ for y in portfolio_dict:
 
 time_stamp = datetime.now()
 
-csv_name = time_stamp + 'order.csv'
-
 # Export the dataframe to a csv
-export_df.to_csv(csv_name)
+export_df.to_csv('order.csv')
 
