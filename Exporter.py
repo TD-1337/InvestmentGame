@@ -16,4 +16,4 @@ def export_to_csv(portfolio_dict):
             export_df = export_df.append(pd.DataFrame([x.return_as_dict() for x in portfolio_dict[y].orders]))
 
     # Export the data frame to a csv
-    export_df.to_csv('orders.csv')
+    export_df.to_csv('orders.csv', index=False)
