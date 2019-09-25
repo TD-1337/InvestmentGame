@@ -5,6 +5,7 @@ from datetime import datetime
 import pandas as pd
 from Importer import Importer
 from UserInterface import UserInterface
+import Exporter
 import os
 
 ######################################
@@ -24,19 +25,12 @@ UserInterface(portfolio_dict).run_user_interface()
 
 ### View portfolio / returns
 #new_portfolio.calculate_return()
-
 ### Sell (optional)
+
 
 ######################################
 # Export new order functionality
 ######################################
 
-# Get al orders and put them in a dataframe
-for y in portfolio_dict:
-    export_df = pd.DataFrame([x.return_as_dict() for x in portfolio_dict[y].orders])
-
-time_stamp = datetime.now()
-
-# Export the dataframe to a csv
-export_df.to_csv('order.csv')
-
+#Export to CSV
+Exporter.export_to_csv(portfolio_dict)
