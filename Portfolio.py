@@ -3,8 +3,8 @@ from typing import Any
 
 class Portfolio:
     from datetime import date
-    from Order import Order
-    from Stock import Stock
+    from .Order import Order
+    from .Stock import Stock
 
     def __init__(self, name):
         self.name = name
