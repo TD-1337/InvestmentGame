@@ -66,7 +66,7 @@ class UserInterface:
 
         print("Thanks for visiting!")
 
-    def method_name(self, portfolio_name):
+    def print_portfolio(self, portfolio_name):
         print_report_df = pd.DataFrame([x.return_as_dict() for x in self.portfolio_dict[portfolio_name].orders])
         print("Your portfolio consists of the following: ")
         print(print_report_df)  # Add optionality
