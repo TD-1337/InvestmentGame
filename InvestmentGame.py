@@ -72,7 +72,7 @@ print("Thanks for visiting!")
 ######################################
 
 # Get al orders and put them in a dataframe
-for y in portfolio_dict
+for y in portfolio_dict:
     export_df = pd.DataFrame([x.return_as_dict() for x in portfolio_dict[y].orders])
 
 # Export the dataframe to a csv
