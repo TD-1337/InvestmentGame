@@ -4,6 +4,7 @@ from Portfolio import Portfolio
 from datetime import datetime
 import pandas as pd
 from Importer import Importer
+import Exporter
 import os
 
 ######################################
@@ -78,20 +79,5 @@ print("Thanks for visiting!")
 # Export new order functionality
 ######################################
 
-# Set var to check if dataframe needs to be created or appended
-create_df = 1
-
-# Get all orders and put them in a dataframe
-for y in portfolio_dict:
-    if create_df == 1:
-        # Create data frame with first portfolio
-        export_df = pd.DataFrame([x.return_as_dict() for x in portfolio_dict[y].orders])
-        # Turn off creation of data frame
-        create_df = 0
-    else:
-        # Append to data frame
-        export_df = export_df.append(pd.DataFrame([x.return_as_dict() for x in portfolio_dict[y].orders]))
-
-
-# Export the dataframe to a csv
-export_df.to_csv('orders.csv')
+#Export to CSV
+Exporter.export_to_csv(portfolio_dict)
