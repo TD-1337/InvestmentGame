@@ -2,6 +2,7 @@ from Order import Order
 from Stock import Stock
 from Portfolio import Portfolio
 from datetime import datetime
+import pandas as pd
 
 ######################################
 # Import existing order functionality
@@ -65,3 +66,8 @@ print("Thanks for visiting!")
 # Export new order functionality
 ######################################
 
+# Get al orders and put them in a dataframe
+export_df = pd.DataFrame([x.return_as_dict() for x in order_list])
+
+# Export the dataframe to a csv
+export_df.to_csv('order.csv')
