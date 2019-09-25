@@ -25,7 +25,7 @@ portfolio_dict = importer.import_order_history_into_portfolios()
 ### View portfolio / returns
 ### Sell (optional)
 
-user_input = "Y"
+user_input = "N"
 
 while user_input.lower() == "y":
 
@@ -73,11 +73,11 @@ print("Thanks for visiting!")
 
 # Get al orders and put them in a dataframe
 for y in portfolio_dict:
-    export_df = pd.DataFrame([x.return_as_dict() for x in portfolio_dict[y].orders])
+    export_df = pd.DataFrame([x.return_as_dict() for x in portfolio_dict[y].Orders])
 
 time_stamp = datetime.now()
 
-csv_name = time_stamp + 'order.csv'
+csv_name = time_stamp.strftime('%d-%m-%y (%H %M)') + 'order.csv'
 
 # Export the dataframe to a csv
 export_df.to_csv(csv_name)
