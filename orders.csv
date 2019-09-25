@@ -1,4 +1,7 @@
-Stock,Volume,PriceAtPurchase,DateOfPurchase,OrderId,Portfolio
-MSFT,20,1,25/09/2019,1,PortfolioTijn
-MSFT,40,3,25/09/2019,3,PortfolioTijn
-TWTR,10,2,25/09/2019,2,PortfolioStef
+DateOfPurchase,OrderId,Portfolio,PriceAtPurchase,Stock,Volume
+2019-09-23,1,PortfolioTijn,1.0,MSFT,20
+2019-09-22,3,PortfolioTijn,3.0,MSFT,40
+2019-09-25,4,PortfolioTijn,137.38,MSFT,150
+2019-09-24,2,PortfolioStef,2.0,TWTR,10
+2019-09-21,5,PortfolioStef,41.42,TWTR,3000
+2019-09-25,6,PortfolioBert,41.42,TWTR,100

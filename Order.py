@@ -10,5 +10,5 @@ class Order:
         self.portfolio = portfolio
 
     def return_as_dict(self):
-        return {'Stock': self.stock, 'Volume': self.volume, 'PriceAtPurchase': self.price_at_purchase,
+        return {'Stock': self.stock.name, 'Volume': self.volume, 'PriceAtPurchase': self.price_at_purchase,
                 'DateOfPurchase': self.date_of_purchase, 'OrderId': self.order_id, 'Portfolio': self.portfolio}

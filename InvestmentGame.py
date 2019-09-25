@@ -2,7 +2,6 @@ from Order import Order
 from Stock import Stock
 from Portfolio import Portfolio
 from datetime import datetime
-import pandas as pd
 from Importer import Importer
 from UserInterface import UserInterface
 import Exporter
