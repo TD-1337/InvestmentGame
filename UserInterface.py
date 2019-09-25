@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 from Order import Order
 from Stock import Stock
 from Portfolio import Portfolio
@@ -39,6 +39,9 @@ class UserInterface:
                 elif new_or_existing.lower() == "y":
                     portfolio_name = input("What is the name of the portfolio? ")
                     portfolio_this_order = self.portfolio_dict[portfolio_name]
+
+                else:
+                    raise Exception()
 
                 stock_name = input("Which stock do you want to purchase? Please input ticker: ")
                 volume = int(input("How many stocks do you want to purchase? "))

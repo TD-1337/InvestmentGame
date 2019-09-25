@@ -29,4 +29,3 @@ class Portfolio:
         value_at_purchase = self.calculate_value_at_purchase_date()
         value_now = self.calculate_value_now()
         return value_now - value_at_purchase
-
