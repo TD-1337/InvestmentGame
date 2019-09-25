@@ -45,7 +45,8 @@ portfolioReturn = newPortfolio.CalculateReturn()
 ######################################
 
 # Get al orders and put them in a dataframe
-export_df = pd.DataFrame([x.return_as_dict() for x in order_list])
+for y in portfolio_dict
+    export_df = pd.DataFrame([x.return_as_dict() for x in portfolio_dict[y].orders])
 
 # Export the dataframe to a csv
 export_df.to_csv('order.csv')
