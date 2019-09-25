@@ -48,9 +48,9 @@ class UserInterface:
             elif action_1.lower() == "sell order":
                 portfolio_this_order = self.determine_portfolio()
                 stock_balances = portfolio_this_order.calculate_balances()
-                print("Please review your current open positions")
+                print("Please review your current open positions:")
                 for key in stock_balances.keys():
-                    print(key, stock_balances[key])
+                    print(key,":",stock_balances[key])
                 new_order = self.create_sell_order(number_of_existing_orders, portfolio_this_order)
                 portfolio_this_order.add_order(new_order)
 

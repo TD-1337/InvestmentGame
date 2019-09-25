@@ -14,11 +14,11 @@ class Importer:
         for index, row in order_history.iterrows():
             stock_this_order = Stock(row['Stock'])
             volume_this_order = row['Volume']
-            price_at_purchase_this_order = row['PriceAtPurchase']
-            date_of_purchase_this_order = row['DateOfPurchase']
+            price_this_order = row['Price']
+            date_this_order = row['Date']
             order_id_this_order = row['OrderId']
             portfolio_this_order = row['Portfolio']
-            new_order = Order(stock_this_order, volume_this_order, price_at_purchase_this_order, date_of_purchase_this_order, order_id_this_order, portfolio_this_order)
+            new_order = Order(stock_this_order, volume_this_order, price_this_order, date_this_order, order_id_this_order, portfolio_this_order)
 
             # Check if portfolio name already exists in dictionary
             if not portfolio_this_order in portfolio_dict:
