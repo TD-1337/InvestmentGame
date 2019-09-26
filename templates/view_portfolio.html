@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form method="post" action="/sell_order2">
+<form method="post" action="/sell_order">
 <b>{{portfolio.name}}</b>
         <table>
             <tr>
@@ -31,7 +31,11 @@
         </table>
         <br>
         What stock do you want to sell?
-        <input type ="text" name="stock">
+        <select name="stock" method="GET" action="/">
+            {% for order in portfolio.orders %}
+                <option value="{{order.stock.name}}">{{order.stock.name}}</option>
+            {% endfor %}
+        </select>
         <br>
         How many?
         <input type="number" name="amount">
