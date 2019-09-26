@@ -1,9 +1,8 @@
 import matplotlib.pyplot as plt
-from Stock import Stock
+from .Stock import Stock
 import pandas as pd
 import datetime
 import numpy as np
-import seaborn as sns
 
 
 class Visualise:
