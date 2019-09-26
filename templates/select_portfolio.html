@@ -7,10 +7,14 @@
 <body>
     <form method="post">
         What is the name of the portfolio you wish to view?
-        <input type ="text" name="portfolio">
+        <select name="Portfolios" method="GET" action="/">
+            <option value="{{names[0]}}" selected>{{names[0]}}</option>
+            {% for x in names[1:] %}
+                <option value="{{x}}">{{x}}</option>
+            {% endfor %}
+        </select>
         <br>
         <button type="submit">View Portfolio</button>
-        <br>
         <br>
         Go back to <a href="http://127.0.0.1:5000/">Home</a>
     </form>
