@@ -33,26 +33,22 @@ def usertype():
 def add_order():
     if request.method == "POST":
         #User input data
-        portfolio_name = request.form['portfolio']
-        stock_name = request.form['stock']
-        volume = request.form['amount']
+        portfolio = request.form['portfolio']
+        stock= request.form['stock']
+        amount = request.form['amount']
         next_action = request.form['next_action']
-        if portfolio_name in portfolio_dict:
-            portfolio_this_order = portfolio_dict[portfolio_name]
+        if portfolio in portfolio_dict:
+            portfolio_this_order = determine_portfolio(portfolio)
         else:
-            portfolio_dict[portfolio_name] = Portfolio(portfolio_name)
-            portfolio_this_order = portfolio_dict[portfolio_name]
+            portfolio_dict[portfolio] = Portfolio(portfolio)
+            portfolio_this_order = portfolio_dict[portfolio]
 
         #add order to dictionary
         number_of_existing_orders = sum([len(portfolio.orders) for portfolio in portfolio_dict.values()])
-        date_of_purchase = datetime.now().strftime('%Y-%m-%d')
-        stock = Stock(stock_name)
-        stock_price_at_purchase = stock.retrieve_stock_price_now()
-        order_id = number_of_existing_orders + 1
-        new_order = Order(stock, volume, stock_price_at_purchase, date_of_purchase, order_id, portfolio_this_order.name)
+        create_buy_order(stock, amount, number_of_existing_orders, portfolio_this_order)
         portfolio_this_order.add_order(new_order)
 
-        #do something with this input
+        #Next action
         if next_action =="No":
             return "Thank you for your business, you have purchased "+volume+" of "+stock_name+" stocks in portfolio "+portfolio_name
             # Export to CSV
@@ -96,5 +92,35 @@ def form():
         return "thank you for your business"+portfolio
     else:
         return render_template("view_portfolio.html")
+
+
+
+
+
+def create_buy_order(self, stockname, amount, number_of_existing_orders, portfolio_this_order):
+        stock_name = stockname
+        volume = amount
+        date_of_purchase = datetime.now().strftime('%Y-%m-%d')
+        stock = Stock(stock_name)
+        stock_price_at_purchase = stock.retrieve_stock_price_now()
+        order_id = number_of_existing_orders + 1
+        new_order = Order(stock, volume, stock_price_at_purchase, date_of_purchase, order_id, portfolio_this_order.name)
+        return new_order
+
+def create_sell_order(self, stock, amount, number_of_existing_orders, portfolio_this_order):
+        stock_to_sell = stock
+        amount_to_sell = amount
+        date_of_sale = datetime.now().strftime('%Y-%m-%d')
+        stock = Stock(stock_to_sell)
+        stock_price_at_sale = stock.retrieve_stock_price_now()
+        order_id = number_of_existing_orders + 1
+        new_order = Order(stock, amount_to_sell, stock_price_at_sale, date_of_sale, order_id,
+                          portfolio_this_order.name)
+        return new_order
+
+def determine_portfolio(self, portfolio):
+        portfolio_name = portfolio
+        portfolio_this_order = self.portfolio_dict[portfolio_name]
+        return portfolio_this_order
 
 
