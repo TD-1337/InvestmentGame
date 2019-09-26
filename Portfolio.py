@@ -33,8 +33,7 @@ class Portfolio:
 
     def calculate_balances(self, date = date.max):
         stock_balances = {}
-        filtered_orders = filter_dictionary_on_dates(self.orders, date)
-        for order in filtered_orders:
+        for order in self.orders:
             stock_name = order.stock.name
             if not stock_name in stock_balances:
                 stock_balances[stock_name] = order.volume

@@ -9,22 +9,9 @@
 <form method="post" action="/sell_order">
 <b>{{portfolio.name}}</b>
         <table>
-            <tr>
-                <td>Stock</td>
-                <td>Price</td>
-                <td>Volume</td>
-                <td>Date of Purchase</td>
-                <td>Order ID</td>
-
-            </tr>
-            {%for order in portfolio.orders%}
+            {%for key,value in portfolio.calculate_balances().items() %}
                 <tr>
-
-                    <td> {{ order.stock.name }} </td>
-                    <td> {{ order.price }}</td>
-                    <td> {{ order.volume }}</td>
-                    <td> {{ order.date }}</td>
-                    <td> {{ order.order_id }}</td>
+                    <td> {{ key }} : {{ value }} </td>
                 </tr>
             {% endfor %}
 
