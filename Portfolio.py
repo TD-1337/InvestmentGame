@@ -1,11 +1,10 @@
 from typing import Any
 from datetime import datetime
-
+from datetime import date
+from Order import Order
+from Stock import Stock
 
 class Portfolio:
-    from datetime import date
-    from Order import Order
-    from Stock import Stock
 
     def __init__(self, name):
         self.name = name
@@ -41,11 +40,3 @@ class Portfolio:
                 stock_balances[stock_name] += order.volume
         return stock_balances
 
-    def filter_dictionary_on_dates(dictObj, date):
-        newDict = dict()
-        # Iterate over all the items in dictionary
-        for (key, value) in dictObj.items():
-            # Check if item satisfies the given condition then add to new dict
-            if (value.date <= date):
-                newDict[key] = value
-        return newDict
