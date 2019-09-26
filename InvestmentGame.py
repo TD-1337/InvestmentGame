@@ -31,7 +31,7 @@ visualisation.plot_portfolio_return(portfolio_dict['PortfolioStef'])
 # Add new order
 ######################################
 
-UserInterface(portfolio_dict).run_user_interface()
+# UserInterface(portfolio_dict).run_user_interface()
 
 ### View portfolio / returns
 #new_portfolio.calculate_return()

@@ -24,7 +24,7 @@ def create_buy_order(stockname, amount, number_of_existing_orders, portfolio_thi
 
 def create_sell_order(stock, amount, number_of_existing_orders, portfolio_this_order):
     stock_to_sell = stock
-    amount_to_sell = amount
+    amount_to_sell = amount * -1
     date_of_sale = datetime.now().strftime('%Y-%m-%d')
     stock = Stock(stock_to_sell)
     stock_price_at_sale = stock.retrieve_stock_price_now()

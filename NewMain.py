@@ -33,15 +33,15 @@ def usertype():
 def buy_order():
     if request.method == "POST":
 
-        number_of_existing_orders = sum([len(portfolio.orders) for portfolio in portfolio_dict.values()])
 
         # User input data
         portfolio_name = request.form['portfolio']
         stock = request.form['stock']
-        amount = request.form['amount']
+        amount = float(request.form['amount'])
         next_action = request.form['next_action']
 
         #add order to dictionary
+        number_of_existing_orders = sum([len(portfolio.orders) for portfolio in portfolio_dict.values()])
         portfolio_this_order = create_portfolio_this_order(portfolio_name, portfolio_dict)
         new_order = create_buy_order(stock, amount, number_of_existing_orders, portfolio_this_order)
         portfolio_this_order.add_order(new_order)
@@ -49,7 +49,7 @@ def buy_order():
         #Next action
         if next_action =="No":
             Exporter.export_to_csv(portfolio_dict)
-            return "Thank you for your business, you have purchased "+amount+" of "+stock+" stocks in portfolio "+portfolio_name
+            return "Thank you for your business, you have purchased "+str(amount)+" of "+stock+" stocks in portfolio "+portfolio_name
             # Export to CSV
         elif next_action =="Yes":
             return  render_template("buy_order.html")
@@ -69,20 +69,29 @@ def select_and_view_portfolio():
     else:
         return render_template("select_portfolio.html", names = list(portfolio_dict.keys()))
 
-#Select Portfolio Page
+
+#Execute Sell order
 @app.route('/sell_order', methods=['POST','GET'])
 def sell_order():
     if request.method == "POST":
-        #process user data
+
+
+        # Process user data
         portfolio_name = request.form['portfolio']
         stock = request.form['stock']
-        amount = request.form['amount']
+        amount = float(request.form['amount'])
         next_action = request.form['next_action']
+
+        # add order to dictionary
+        number_of_existing_orders = sum([len(portfolio.orders) for portfolio in portfolio_dict.values()])
+        portfolio_this_order = determine_portfolio(portfolio_name, portfolio_dict)
+        new_order = create_sell_order(stock,amount,number_of_existing_orders,portfolio_this_order)
+        portfolio_this_order.add_order(new_order)
 
         # Next action
         if next_action == "No":
             Exporter.export_to_csv(portfolio_dict)
-            return "Thank you for your business, you have sold " + amount + " of " + stock + " stocks in portfolio " + portfolio_name
+            return "Thank you for your business, you have sold " + str(amount) + " of " + stock + " stocks in portfolio " + portfolio_name
             # Export to CSV
         elif next_action == "Yes":
             return render_template("view_portfolio.html",  portfolio= portfolio_dict[portfolio_name])
@@ -91,6 +100,7 @@ def sell_order():
             return redirect("/")
     else:
         return render_template("view_portfolio.html",  portfolio= portfolio_dict[portfolio_name])
+
 
 
 
