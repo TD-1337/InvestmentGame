@@ -34,6 +34,8 @@ def usertype():
 def buy_order():
     if request.method == "POST":
 
+        number_of_existing_orders = sum([len(portfolio.orders) for portfolio in portfolio_dict.values()])
+
         # User input data
         portfolio_name = request.form['portfolio']
         stock = request.form['stock']
