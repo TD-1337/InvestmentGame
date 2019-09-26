@@ -32,7 +32,7 @@ class Visualise:
         for i in portfolio.orders:
 
             # Convert string to datetime
-            date_time_action_date = datetime.datetime.strptime(i.date, "%Y/%m/%d")
+            date_time_action_date = datetime.datetime.strptime(i.date, "%Y-%m-%d")
             if count_i_1 == 1:
                 min_date = date_time_action_date
                 count_i_1 = 0
@@ -52,7 +52,7 @@ class Visualise:
             df_order_hist = pd.DataFrame({'Date': order_hist.index, 'Closing price': order_hist.values})
 
             # Add column for volumes
-            date_time_action_date = datetime.datetime.strptime(i.date, "%Y/%m/%d")
+            date_time_action_date = datetime.datetime.strptime(i.date, "%Y-%m-%d")
             df_order_hist['Volume'] = df_order_hist['Date'].apply(
                 lambda x: i.volume if x >= date_time_action_date else 0)
 

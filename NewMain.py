@@ -67,8 +67,7 @@ def select_and_view_portfolio():
         #process user data
         portfolio_name = request.form['Portfolios']
         visualisation = Visualise()
-        # visualisation.plot_stock_return("TWTR", '25-09-2018')
-        visualisation.plot_portfolio_return(portfolio_dict['PortfolioStef'], 'static/Plaatje.png')
+        visualisation.plot_portfolio_return(portfolio_dict[portfolio_name], 'static/Plaatje.png')
         return render_template("view_portfolio.html",  portfolio= portfolio_dict[portfolio_name])
     else:
         return render_template("select_portfolio.html", names = list(portfolio_dict.keys()))
@@ -90,6 +89,9 @@ def sell_order():
         portfolio_this_order = determine_portfolio(portfolio_name, portfolio_dict)
         new_order = create_sell_order(stock,amount,number_of_existing_orders,portfolio_this_order)
         portfolio_this_order.add_order(new_order)
+
+        visualisation = Visualise()
+        visualisation.plot_portfolio_return(portfolio_dict[portfolio_name], 'static/Plaatje.png')
 
         # Next action
         if next_action == "No":
