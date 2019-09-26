@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from .Stock import Stock
 import pandas as pd
 import datetime
-
+ 
 
 class Visualise:
 
