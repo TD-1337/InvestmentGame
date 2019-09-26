@@ -79,7 +79,6 @@ def select_and_view_portfolio():
 def sell_order():
     if request.method == "POST":
 
-
         # Process user data
         portfolio_name = request.form['portfolio']
         stock = request.form['stock']
