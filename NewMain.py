@@ -1,5 +1,5 @@
 from flask import Flask, escape, request, render_template, redirect
-
+from pandas import pandas as pd
 from .Order import Order
 from .Stock import Stock
 from .Portfolio import Portfolio
@@ -71,6 +71,14 @@ def sell_order():
         amount = request.form['amount']
         next_action = request.form['next_action']
 
+        portfolio_this_order = determine_portfolio(portfolio_name, portfolio_dict)
+        stock_balances = portfolio_this_order.calculate_balances()
+        print("Please review your current open positions:")
+        for key in stock_balances.keys():
+            print(key, ":", stock_balances[key])
+
+        new_order = self.create_sell_order(number_of_existing_orders, portfolio_this_order)
+        portfolio_this_order.add_order(new_order)
         #do something with this input
         if next_action =="No":
             Exporter.export_to_csv(portfolio_dict)
@@ -84,19 +92,24 @@ def sell_order():
     else:
         return render_template("sell_order.html")
 
-#View Portfolio Page
-@app.route('/view_portfolio', methods=['POST','GET'])
-def form():
+#Select Portfolio Page
+@app.route('/select_portfolio', methods=['POST','GET'])
+def select_and_view_portfolio():
     if request.method == "POST":
         #process user data
-        portfolio = request.form['portfolio']
-        return "thank you for your business"+portfolio
+        portfolio_name = request.form['portfolio']
+        portfolio_df = sub_portfolio(portfolio_name)
+
+        return render_template("view_portfolio.html",  portfolio= portfolio_dict[portfolio_name])
     else:
-        return render_template("view_portfolio.html")
+        return render_template("select_portfolio.html")
 
 
-
-
+def sub_portfolio(portfolio_name):
+        print_report_df = pd.DataFrame([x.return_as_dict() for x in portfolio_dict[portfolio_name].orders])
+        #print("Your portfolio consists of the following: ")
+        #print(print_report_df)  # Add optionality
+        return print_report_df
 
 def create_buy_order(stockname, amount, number_of_existing_orders, portfolio_this_order):
         stock_name = stockname

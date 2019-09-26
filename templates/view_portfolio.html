@@ -5,17 +5,32 @@
     <title>View Portfolio</title>
 </head>
 <body>
-    <form method="post">
-        What is the name of the portfolio you wish to view?
-        <input type ="text" name="portfolio">
-        <br>
-        <button type="submit">View Portfolio</button>
+<b>{{portfolio.name}}</b>
+        <table>
+            <tr>
+                <td>Stock</td>
+                <td>Price</td>
+                <td>Volume</td>
+                <td>Date of Purchase</td>
+                <td>Order ID</td>
+
+            </tr>
+            {%for order in portfolio.orders%}
+                <tr>
+
+                    <td> {{ order.stock.name }} </td>
+                    <td> {{ order.price }}</td>
+                    <td> {{ order.volume }}</td>
+                    <td> {{ order.date }}</td>
+                    <td> {{ order.order_id }}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
 
         <br>
         <br>
         Go back to <a href="http://127.0.0.1:5000/">Home</a>
-    </form>
-
 
 </body>
 </html>
