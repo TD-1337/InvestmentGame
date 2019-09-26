@@ -3,6 +3,8 @@ from Stock import Stock
 import pandas as pd
 import datetime
 import numpy as np
+import seaborn as sns
+
 
 class Visualise:
 
@@ -38,7 +40,9 @@ class Visualise:
             else:
                 min_date = min(min_date, date_time_action_date)
 
+        count_i_1 = 1
         for i in portfolio.orders:
+
 
             # Retrieve stock information
             stock = i.stock.name
@@ -56,8 +60,19 @@ class Visualise:
             # Calculate value by multiplying volume and price
             df_order_hist['Value'] = df_order_hist['Closing price'].multiply(df_order_hist['Volume'])
 
+            # Check if first instance of for loop, if so create data frame. Otherwise expand on it.
+            if count_i_1 == 1:
+                df_port_values = df_order_hist['Date']
+                df_port_values[stock] = df_order_hist['Value']
+                count_i_1 = 0
+            else:
+                # Check if stock already in portfolio, then add to the existing one. Else make new column
+                if stock in df_port_values.columns:
+                    df_port_values[stock] = df_port_values[stock] + df_order_hist['Value']
+                else:
+                    df_port_values[stock] = df_order_hist['Value']
+
         # Plot
-        plt.plot(sub_selection_series)
-        plt.ylabel('Stock price')
-        plt.title('Stockprice of ' + stock)
+        plt.stackplot(df_order_hist['Date'], (x for x in list(df_port_values)[1:]), labels=[df_port_values.columns[1:]])
+        plt.legend(loc='upper left')
         plt.show()
