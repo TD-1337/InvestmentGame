@@ -25,7 +25,7 @@ portfolio_dict = importer.import_order_history_into_portfolios()
 visualisation = Visualise()
 #visualisation.plot_stock_return("TWTR", '25-09-2018')
 
-visualisation.plot_portfolio_return(portfolio_dict['PortfolioStef'])
+visualisation.plot_portfolio_return(portfolio_dict['PortfolioStef'], 'Plaatje.png')
 
 ######################################
 # Add new order

@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from .Stock import Stock
+from Stock import Stock
 import pandas as pd
 import datetime
 import numpy as np
@@ -26,7 +26,7 @@ class Visualise:
         plt.title('Stockprice of ' + stock)
         plt.show()
 
-    def plot_portfolio_return(self, portfolio):
+    def plot_portfolio_return(self, portfolio, name_figure):
         # Retrieve stock history
 
         count_i_1 = 1
@@ -81,4 +81,5 @@ class Visualise:
         df_port_values.dropna(inplace=True, how='any')
         df_port_values.plot.area()
         plt.legend(loc='upper left')
-        plt.show()
+        plt.savefig(name_figure)
+

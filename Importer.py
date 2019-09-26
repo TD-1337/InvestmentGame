@@ -1,7 +1,7 @@
 import pandas as pd
-from .Order import Order
-from .Stock import Stock
-from .Portfolio import Portfolio
+from Order import Order
+from Stock import Stock
+from Portfolio import Portfolio
 
 class Importer:
     def __init__(self, working_directory):
