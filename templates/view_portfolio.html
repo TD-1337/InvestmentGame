@@ -23,10 +23,13 @@
 
         </table>
         <br>
+        <img src="/static/Plaatje.png" alt="Portfolio performance">
+
+        <br>
         What stock do you want to sell?
         <select name="stock" method="GET" action="/">
-            {% for order in portfolio.orders %}
-                <option value="{{order.stock.name}}">{{order.stock.name}}</option>
+            {% for key in portfolio.calculate_balances() %}
+                <option value="{{key}}">{{key}}</option>
             {% endfor %}
         </select>
         <br>
