@@ -16,7 +16,6 @@ import os
 importer = Importer(os.getcwd())
 portfolio_dict = importer.import_order_history_into_portfolios()
 
-
 ######################################
 # Add new order / view portfolio via FLASK
 ######################################
@@ -97,13 +96,13 @@ def buy_order():
 def select_and_view_portfolio():
     if request.method == "POST":
         #process user data
-        portfolio_name = request.form['portfolio']
+        portfolio_name = request.form['Portfolios']
         return render_template("view_portfolio.html",  portfolio= portfolio_dict[portfolio_name])
     else:
-        return render_template("select_portfolio.html")
+        return render_template("select_portfolio.html", names = list(portfolio_dict.keys()))
 
 #Select Portfolio Page
-@app.route('/sell_order2', methods=['POST','GET'])
+@app.route('/sell_order', methods=['POST','GET'])
 def sell_order():
     if request.method == "POST":
         #process user data
@@ -118,12 +117,12 @@ def sell_order():
             return "Thank you for your business, you have sold " + amount + " of " + stock + " stocks in portfolio " + portfolio_name
             # Export to CSV
         elif next_action == "Yes":
-            return render_template("sell_order2.html")
+            return render_template("view_portfolio.html",  portfolio= portfolio_dict[portfolio_name])
         elif next_action == "Back to Home":
             Exporter.export_to_csv(portfolio_dict)
             return redirect("/")
     else:
-        return render_template("sell_order2.html")
+        return render_template("view_portfolio.html",  portfolio= portfolio_dict[portfolio_name])
 
 
 
