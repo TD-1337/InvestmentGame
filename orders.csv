@@ -1,7 +1,7 @@
 Stock,Volume,Price,Date,OrderId,Portfolio
-MSFT,100.0,1.0,2018-08-20,1,PortfolioTijn
-MSFT,100.0,3.0,2018-11-22,2,PortfolioTijn
-MSFT,200.0,127.38,2019-03-25,3,PortfolioTijn
+MSFT,10.0,1.0,2018-08-20,1,PortfolioTijn
+MSFT,10.0,3.0,2018-11-22,2,PortfolioTijn
+MSFT,20.0,127.38,2019-03-25,3,PortfolioTijn
 AAPL,100.0,42.5,2018-09-26,4,PortfolioTijn
 AAPL,100.0,42.5,2018-12-26,5,PortfolioTijn
 TWTR,200.0,42.5,2019-06-26,6,PortfolioTijn
