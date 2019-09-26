@@ -50,7 +50,7 @@ def buy_order():
         #Next action
         if next_action =="No":
             Exporter.export_to_csv(portfolio_dict)
-            return "Thank you for your business, you have purchased "+str(amount)+" of "+stock+" stocks in portfolio "+portfolio_name
+            return render_template("anditsgone.html")
             # Export to CSV
         elif next_action =="Yes":
             return  render_template("buy_order.html")
