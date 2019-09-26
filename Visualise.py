@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from .Stock import Stock
 import pandas as pd
 import datetime
+import numpy as np
 
 
 class Visualise:
@@ -31,34 +32,27 @@ class Visualise:
         for i in portfolio.orders:
 
             # Convert string to datetime
-            date_time_action_date = datetime.datetime.strptime(i.date, "%Y-%m-%d")
+            date_time_action_date = datetime.datetime.strptime(i.date, "%Y/%m/%d")
             if count_i_1 == 1:
                 min_date = date_time_action_date
                 count_i_1 = 0
             else:
                 min_date = min(min_date, date_time_action_date)
 
-        # Build data frame used to construct graph
         count_i_1 = 1
-        df_port_values = pd.DataFrame
         for i in portfolio.orders:
+
+
             # Retrieve stock information
             stock = i.stock.name
-            if df_port_values.empty:
-                order_hist = Stock(stock).retrieve_stock_price_hist(min_date)
-            elif stock in df_port_values.columns:
-                order_hist = df_port_values[stock]
-                order_hist.rename_axis('Closing price', inplace=True)
-                order_hist.index = df_port_values.index
-            else:
-                order_hist = Stock(stock).retrieve_stock_price_hist(min_date)
+            order_hist = Stock(stock).retrieve_stock_price_hist(min_date)
 
             # Convert index to datetime and series to date frame
             order_hist.index = pd.to_datetime(order_hist.index)
             df_order_hist = pd.DataFrame({'Date': order_hist.index, 'Closing price': order_hist.values})
 
             # Add column for volumes
-            date_time_action_date = datetime.datetime.strptime(i.date, "%Y-%m-%d")
+            date_time_action_date = datetime.datetime.strptime(i.date, "%Y/%m/%d")
             df_order_hist['Volume'] = df_order_hist['Date'].apply(
                 lambda x: i.volume if x >= date_time_action_date else 0)
 
@@ -87,3 +81,4 @@ class Visualise:
         df_port_values.plot.area()
         plt.legend(loc='upper left')
         plt.savefig(name_figure)
+

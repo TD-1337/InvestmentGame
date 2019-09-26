@@ -8,19 +8,28 @@
 
 <form method="post" action="/sell_order">
 <b>{{portfolio.name}}</b>
+        <br>
+        <br>
         <table>
+                <tr>
+                    <th>Stock name</th>
+                    <th>Amount owned</th>
             {%for key,value in portfolio.calculate_balances().items() %}
                 <tr>
-                    <td> {{ key }} : {{ value }} </td>
+                    <td> {{ key }} </td>
+                    <td> {{ value }} </td>
                 </tr>
             {% endfor %}
 
         </table>
         <br>
+        <img src="/static/Plaatje.png" alt="Portfolio performance">
+
+        <br>
         What stock do you want to sell?
         <select name="stock" method="GET" action="/">
-            {% for order in portfolio.orders %}
-                <option value="{{order.stock.name}}">{{order.stock.name}}</option>
+            {% for key in portfolio.calculate_balances() %}
+                <option value="{{key}}">{{key}}</option>
             {% endfor %}
         </select>
         <br>
@@ -35,6 +44,7 @@
         </select>
         <br>
         <input type="hidden" name="portfolio" value="{{portfolio.name}}">
+        <br>
         <button type="submit">Sell</button>
 </form>
 </body>

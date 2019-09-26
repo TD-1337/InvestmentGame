@@ -7,6 +7,7 @@ from datetime import datetime
 from .Importer import Importer
 from .PortfolioUtils import create_portfolio_this_order, create_buy_order, create_sell_order, determine_portfolio
 from . import Exporter
+from .Visualise import Visualise
 import os
 
 ######################################
@@ -65,6 +66,9 @@ def select_and_view_portfolio():
     if request.method == "POST":
         #process user data
         portfolio_name = request.form['Portfolios']
+        visualisation = Visualise()
+        # visualisation.plot_stock_return("TWTR", '25-09-2018')
+        visualisation.plot_portfolio_return(portfolio_dict['PortfolioStef'], 'static/Plaatje.png')
         return render_template("view_portfolio.html",  portfolio= portfolio_dict[portfolio_name])
     else:
         return render_template("select_portfolio.html", names = list(portfolio_dict.keys()))
@@ -74,7 +78,6 @@ def select_and_view_portfolio():
 @app.route('/sell_order', methods=['POST','GET'])
 def sell_order():
     if request.method == "POST":
-
 
         # Process user data
         portfolio_name = request.form['portfolio']
