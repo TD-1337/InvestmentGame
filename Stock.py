@@ -33,6 +33,7 @@ class Stock:
 
         # Parse the index to create a datetimeindex
         df.index = pd.DatetimeIndex(df.index)
+        df = df.loc[df.index >= date]
 
         # Fix the column names
         df.rename(columns=lambda s: s[3:], inplace=True)

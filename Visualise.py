@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from Stock import Stock
+from .Stock import Stock
 import pandas as pd
 import datetime
 import numpy as np
@@ -33,7 +33,7 @@ class Visualise:
         for i in portfolio.orders:
 
             # Convert string to datetime
-            date_time_action_date = datetime.datetime.strptime(i.date, "%Y-%m-%d")
+            date_time_action_date = datetime.datetime.strptime(i.date, "%d/%m/%Y")
             if count_i_1 == 1:
                 min_date = date_time_action_date
                 count_i_1 = 0
@@ -46,14 +46,14 @@ class Visualise:
 
             # Retrieve stock information
             stock = i.stock.name
-            order_hist = Stock(stock).retrieve_stock_price_hist(min_date.strftime("%Y-%m-%d"))
+            order_hist = Stock(stock).retrieve_stock_price_hist(min_date)
 
             # Convert index to datetime and series to date frame
             order_hist.index = pd.to_datetime(order_hist.index)
             df_order_hist = pd.DataFrame({'Date': order_hist.index, 'Closing price': order_hist.values})
 
             # Add column for volumes
-            date_time_action_date = datetime.datetime.strptime(i.date, "%Y-%m-%d")
+            date_time_action_date = datetime.datetime.strptime(i.date, "%d/%m/%Y")
             df_order_hist['Volume'] = df_order_hist['Date'].apply(
                 lambda x: i.volume if x >= date_time_action_date else 0)
 
@@ -62,17 +62,23 @@ class Visualise:
 
             # Check if first instance of for loop, if so create data frame. Otherwise expand on it.
             if count_i_1 == 1:
-                df_port_values = df_order_hist['Date']
-                df_port_values[stock] = df_order_hist['Value']
+                df_port_values = pd.DataFrame(df_order_hist['Value'])
+                df_port_values.rename(columns={'Value': stock}, inplace=True)
+                df_port_values.set_index(df_order_hist['Date'], inplace=True)
                 count_i_1 = 0
             else:
                 # Check if stock already in portfolio, then add to the existing one. Else make new column
                 if stock in df_port_values.columns:
-                    df_port_values[stock] = df_port_values[stock] + df_order_hist['Value']
+                    column_to_add = df_order_hist['Value']
+                    column_to_add.index = df_order_hist['Date']
+                    df_port_values[stock] = df_port_values[stock] + column_to_add
                 else:
-                    df_port_values[stock] = df_order_hist['Value']
+                    column_to_add = df_order_hist['Value']
+                    column_to_add.index = df_order_hist['Date']
+                    df_port_values[stock] = column_to_add
 
         # Plot
-        plt.stackplot(df_order_hist['Date'], (x for x in list(df_port_values)[1:]), labels=[df_port_values.columns[1:]])
+        df_port_values.dropna(inplace=True, how='any')
+        df_port_values.plot.area()
         plt.legend(loc='upper left')
         plt.show()
