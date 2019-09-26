@@ -5,6 +5,8 @@
     <title>View Portfolio</title>
 </head>
 <body>
+
+<form method="post" action="/sell_order2">
 <b>{{portfolio.name}}</b>
         <table>
             <tr>
@@ -27,10 +29,23 @@
             {% endfor %}
 
         </table>
-
         <br>
+        What stock do you want to sell?
+        <input type ="text" name="stock">
         <br>
-        Go back to <a href="http://127.0.0.1:5000/">Home</a>
-
+        How many?
+        <input type="number" name="amount">
+        <br>
+        Do you want to sell another stock?
+        <select name="next_action">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            <option value="Back to Home">Back to Home</option>
+        </select>
+        <br>
+        <input type="hidden" name="portfolio" value="{{portfolio.name}}">
+        <button type="submit">Sell</button>
+</form>
 </body>
+
 </html>
